@@ -3,7 +3,7 @@ import db from './index.cjs';
 
 const PSEs = db.sequelize.define("Pses", {
     AthleteId: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     Date: {
@@ -11,11 +11,11 @@ const PSEs = db.sequelize.define("Pses", {
         allowNull: false
     },
     Exertion: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     Pain: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     PainPlace: {

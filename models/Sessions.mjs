@@ -3,7 +3,7 @@ import db from './index.cjs';
 
 const Sessions = db.sequelize.define("Sessions", {
     CategoryId: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     StartTime: {
@@ -19,7 +19,7 @@ const Sessions = db.sequelize.define("Sessions", {
         allowNull: false
     },
     Pause: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     PlannedLoad: {

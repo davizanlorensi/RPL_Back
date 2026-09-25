@@ -3,7 +3,8 @@ import db from './index.cjs';
 
 const Categories = db.sequelize.define("Categories", {
     Id: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
+        primaryKey: true,
         allowNull: false
     },
     Name: {

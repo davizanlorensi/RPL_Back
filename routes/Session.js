@@ -13,25 +13,25 @@ sessionRouter.get("/", async (req, res) => {
 
 sessionRouter.get("/average/:categoryId/:week", async (req, res) => {
     const list = await db.sequelize.query(
-        `SELECT (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime)) FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+        `SELECT (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime)) FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) BETWEEN DATE(:startCW) AND DATE(:endCW) AND C.Id = :categoryId) AS CurrentTotal,
-                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause) FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause) FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) BETWEEN DATE(:startCW) AND DATE(:endCW) AND C.Id = :categoryId) AS CurrentEffective,
-                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime)) FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime)) FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) BETWEEN DATE(:start1W) AND DATE(:end1W) AND C.Id = :categoryId) AS FirstWTotal,
-                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause) FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause) FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) BETWEEN DATE(:start1W) AND DATE(:end1W) AND C.Id = :categoryId) AS FirstWEffective,
-                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime)) FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime)) FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) BETWEEN DATE(:start2W) AND DATE(:end2W) AND C.Id = :categoryId) AS SecondWTotal,
-                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause) FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause) FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) BETWEEN DATE(:start2W) AND DATE(:end2W) AND C.Id = :categoryId) AS SecondWEffective,
-                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime)) FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime)) FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) BETWEEN DATE(:start3W) AND DATE(:end3W) AND C.Id = :categoryId) AS ThirdWTotal,
-                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause) FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause) FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) BETWEEN DATE(:start3W) AND DATE(:end3W) AND C.Id = :categoryId) AS ThirdWEffective,
-                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime)) FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime)) FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) BETWEEN DATE(:start4W) AND DATE(:end4W) AND C.Id = :categoryId) AS FourthWTotal,
-                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause) FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause) FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) BETWEEN DATE(:start4W) AND DATE(:end4W) AND C.Id = :categoryId) AS FourthWEffective`,
         {
             replacements: {
@@ -56,25 +56,25 @@ sessionRouter.get("/average/:categoryId/:week", async (req, res) => {
 
 sessionRouter.get("/weekAverage/:categoryId/:week", async (req, res) => {
     const list = await db.sequelize.query(
-        `SELECT (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+        `SELECT (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) = DATE(:monday) AND C.Id = :categoryId) AS MonTotal,
-                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) = DATE(:monday) AND C.Id = :categoryId) AS MonEffective,
-                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) = DATE(:tuesday) AND C.Id = :categoryId) AS TueTotal,
-                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) = DATE(:tuesday) AND C.Id = :categoryId) AS TueEffective,
-                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) = DATE(:wednesday) AND C.Id = :categoryId) AS WedTotal,
-                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) = DATE(:wednesday) AND C.Id = :categoryId) AS WedEffective,
-                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) = DATE(:thursday) AND C.Id = :categoryId) AS ThuTotal,
-                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) = DATE(:thursday) AND C.Id = :categoryId) AS ThuEffective,
-                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) = DATE(:friday) AND C.Id = :categoryId) AS FriTotal,
-                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause FROM hope_dev.Sessions S JOIN Categories C ON C.Id = S.CategoryId 
+                (SELECT TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause FROM Sessions S JOIN Categories C ON C.Id = S.CategoryId 
                     WHERE DATE(S.Day) = DATE(:friday) AND C.Id = :categoryId) AS FriEffective`,
         {
             replacements: {
@@ -97,11 +97,11 @@ sessionRouter.get("/magnitude/:categoryId/:week", async (req, res) => {
         `SELECT YEARWEEK(S.Day, 3) AS Day,
                 AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime)) AS TotalVolume, 
                 AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime) - Pause) AS EffectiveVolume, 
-                (SELECT AVG(P.Exertion) FROM hope_dev.pses P 
+                (SELECT AVG(P.Exertion) FROM Pses P 
                         JOIN Athletes A ON A.Id = P.AthleteId 
                     WHERE DATE(P.Date) BETWEEN DATE(:startM) AND DATE(:endM) AND A.CategoryId = :categoryId AND YEARWEEK(P.Date, 3) = YEARWEEK(S.Day, 3)
                     GROUP BY YEARWEEK(P.Date, 3)) AS Exertion,
-                (SELECT AVG(P.Exertion) * (AVG(TIMESTAMPDIFF(MINUTE, SE.StartTime, SE.EndTime) - SE.Pause)) FROM hope_dev.pses P 
+                (SELECT AVG(P.Exertion) * (AVG(TIMESTAMPDIFF(MINUTE, SE.StartTime, SE.EndTime) - SE.Pause)) FROM Pses P 
                         JOIN Athletes A ON A.Id = P.AthleteId 
                         JOIN Sessions SE ON SE.CategoryId = A.CategoryId
                     WHERE DATE(SE.Day) BETWEEN DATE(:startM) AND DATE(:endM) AND DATE(P.Date) BETWEEN DATE(:startM) AND DATE(:endM) 
@@ -134,7 +134,7 @@ sessionRouter.get("/weekMagnitude/:categoryId/:week", async (req, res) => {
                 AVG(P.Exertion) * (AVG(TIMESTAMPDIFF(MINUTE, S.StartTime, S.EndTime)) - Pause) AS TRIMP
             FROM Sessions S 
             JOIN Athletes A ON A.CategoryId = S.CategoryId
-            JOIN pses P ON DATE(P.Date) = DATE(S.Day) AND A.Id = P.AthleteId
+            JOIN Pses P ON DATE(P.Date) = DATE(S.Day) AND A.Id = P.AthleteId
             WHERE DATE(S.Day) 
             BETWEEN DATE(:startW) AND DATE(:endW) AND S.CategoryId = :categoryId 
             GROUP BY P.Date, S.Day, S.PlannedLoad, S.Pause, S.Type ORDER BY S.Day`,

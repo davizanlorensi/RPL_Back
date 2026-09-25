@@ -3,15 +3,15 @@ import db from './index.cjs';
 
 const GameAthletes = db.sequelize.define("GameAthletes", {
     AthleteId: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     GameId: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     MinutesPlayed: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: true
     },
     Payed: {
@@ -19,7 +19,7 @@ const GameAthletes = db.sequelize.define("GameAthletes", {
         allowNull: false
     },
     Number: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: true
     }
 });

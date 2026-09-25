@@ -7,7 +7,7 @@ const Games = db.sequelize.define("Games", {
         allowNull: false
     },
     CategoryId: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     Time: {
@@ -15,7 +15,7 @@ const Games = db.sequelize.define("Games", {
         allowNull: false
     },
     Pause: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false
     }
 });

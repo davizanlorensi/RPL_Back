@@ -1,9 +1,10 @@
 {
   "development": {
-    "username": "root",
-    "password": "hope2023",
-    "database": "hope_dev",
-    "host": "localhost",
+    "username": "avnadmin",
+    "password": "AVNS_qzqRbeEdACXBnHgiOVH",
+    "database": "defaultdb",
+    "host": "hope-prod-hope.b.aivencloud.com",
+    "port": "17589",
     "dialect": "mysql"
   },
   "test": {
