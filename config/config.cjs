@@ -2,7 +2,7 @@ module.exports = {
   "development": {
     "username": "root",
     "password": "hope2023",
-    "database": "hope",
+    "database": "hope_dev",
     "host": "localhost",
     "dialect": "mysql"
   },
