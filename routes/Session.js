@@ -1,6 +1,6 @@
 import express from "express";
 import Sessions from '../models/Sessions.mjs';
-import { QueryTypes } from "sequelize";
+import { QueryTypes, Op } from "sequelize";
 import db from '../models/index.cjs';
 import { getStartOfWeek1, getEndOfWeek1, getStartOfWeek2, getEndOfWeek2, getStartOfWeek3, getEndOfWeek3, getStartOfWeek4, getEndOfWeek4, getStartOfCurrentWeek, getEndOfCurrentWeek, getMonday, getTuesday, getWednesday, getThursday, getFriday, getStartOfMonth, getEndOfMonth } from "../dates.js";
 
@@ -8,6 +8,19 @@ const sessionRouter = express.Router();
 
 sessionRouter.get("/", async (req, res) => {
     const list = await Sessions.findAll();
+    res.json(list);
+})
+
+sessionRouter.get("/:id", async (req, res) => {
+    const session = await Sessions.findByPk(req.params.id);
+    res.json(session);
+})
+
+sessionRouter.get("/getByCategory/:categoryId", async (req, res) => {
+    const list = await Sessions.findAll({
+        where: { categoryId: req.params.categoryId },
+        order: [['day', 'DESC']]
+    });
     res.json(list);
 })
 
@@ -149,6 +162,39 @@ sessionRouter.get("/weekMagnitude/:categoryId/:week", async (req, res) => {
     );
 
     res.json(list);
+})
+
+sessionRouter.post("/", async (req, res) => {
+    const session = req.body;
+    session.StartTime = session.StartTime.split('T')[1].split('.')[0];
+    session.EndTime = session.EndTime.split('T')[1].split('.')[0];
+
+    const count = await Sessions.count({
+        where: {
+            day: session.Day.split('T')[0],
+            categoryId: session.CategoryId,
+            id: {
+                [Op.ne]: session.Id,
+            },
+        }
+    });
+
+    if (count > 0) {
+        res.status(550).json(session);
+        return;
+    }
+
+    await Sessions.upsert(session);
+    res.json(session);
+})
+
+sessionRouter.delete("/:id", async (req, res) => {
+    await Sessions.destroy({
+        where: {
+            id: req.params.id,
+        },
+    });
+    res.json({});
 })
 
 export default sessionRouter;

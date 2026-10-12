@@ -2,6 +2,11 @@ import { DataTypes } from "sequelize";
 import db from './index.cjs';
 
 const Sessions = db.sequelize.define("Sessions", {
+    Id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        allowNull: false
+    },
     CategoryId: {
         type: DataTypes.INTEGER,
         allowNull: false
