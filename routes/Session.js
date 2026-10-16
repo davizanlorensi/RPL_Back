@@ -150,7 +150,7 @@ sessionRouter.get("/weekMagnitude/:categoryId/:week", async (req, res) => {
             JOIN Pses P ON DATE(P.Date) = DATE(S.Day) AND A.Id = P.AthleteId
             WHERE DATE(S.Day) 
             BETWEEN DATE(:startW) AND DATE(:endW) AND S.CategoryId = :categoryId 
-            GROUP BY P.Date, S.Day, S.PlannedLoad, S.Pause, S.Type ORDER BY S.Day`,
+            GROUP BY S.Day, S.PlannedLoad, S.Pause, S.Type ORDER BY S.Day`,
         {
             replacements: {
                 categoryId: req.params.categoryId,
