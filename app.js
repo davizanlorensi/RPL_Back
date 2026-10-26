@@ -7,6 +7,7 @@ import cors from 'cors'
 import psrRouter from "./routes/PSR.js";
 import athleteRouter from "./routes/Athlete.js";
 import 'dotenv/config';
+import gameRouter from "./routes/Game.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use("/category", categoryRouter);
 app.use("/pse", pseRouter);
 app.use("/psr", psrRouter);
 app.use("/session", sessionRouter);
+app.use("/games", gameRouter);
 app.use("/athlete", athleteRouter);
 
 db.sequelize.sync().then(() => {
